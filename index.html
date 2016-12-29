@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<script src="src/jwplayer.js"></script>
+<script>jwplayer.key="EAkB95hz+zXVmjOSemZBL71CB07ebvWjgMyw5QsKTxLLPm00nSaIcg==";</script>
+</head>
+<body>
+    <b>Issue:</b> Please indicate issue here
+    <br><br>
+    <b>Reproduction steps:</b> Please state the steps necessary to reproduce this issue
+    <br><br>
+    <b>Expected behavior:</b> Please state your expected behavior here
+    <br><br>
+    <b>Actual outcome:</b> Please state the actual outcome here
+    <br><br><br>
+    <div id="player">Loading your player...</div>
+    <script>
+        jwplayer('player').setup({
+            file: '//content.jwplatform.com/videos/s8BPzDe0-kNspJqnJ.mp4',
+            advertising: {
+	        client: "vast",
+	            schedule:{
+	                adbreak1: {
+		                offset: "pre",
+		                tag: "adpod.xml",
+		                skipoffset: 3
+	                }
+	            }
+	        }
+        });
+    </script>
+</body>
+</html>
