@@ -3,14 +3,14 @@
             <Ad id="player-preroll" sequence="1">
             <Wrapper>
                 <AdSystem>DoubleClick</AdSystem>
-                <VASTAdTagURI><![CDATA[http://pubads.g.doubleclick.net/gampad/ads?sz=1024x576&iu=/8373/CH/Cinergy/CH_Teleboy.ch-new-InternetTV_EX/ChannelSwitch1/DE_ChannelSwitch1&ciu_szs=&nofb=1&impl=s&gdfp_req=1&env=vp&output=xml_vast3&unviewed_position_start=1&url=http://www.teleboy.ch&correlator=1482999097&cust_params=]]></VASTAdTagURI>
+                <VASTAdTagURI><![CDATA[://pubads.g.doubleclick.net/gampad/ads?sz=1024x576&iu=/8373/CH/Cinergy/CH_Teleboy.ch-new-InternetTV_EX/ChannelSwitch1/DE_ChannelSwitch1&ciu_szs=&nofb=1&impl=s&gdfp_req=1&env=vp&output=xml_vast3&unviewed_position_start=1&url=http://www.teleboy.ch&correlator=1482999097&cust_params=]]></VASTAdTagURI>
 
                             </Wrapper>
         </Ad>
             <Ad id="player-preroll" sequence="2">
             <Wrapper>
                 <AdSystem>DoubleClick</AdSystem>
-                <VASTAdTagURI><![CDATA[http://pubads.g.doubleclick.net/gampad/ads?sz=1024x576&iu=/8373/CH/Cinergy/CH_Teleboy.ch-new-InternetTV_EX/ChannelSwitch2/DE_ChannelSwitch2&ciu_szs=&nofb=1&impl=s&gdfp_req=1&env=vp&output=xml_vast3&unviewed_position_start=1&url=http://www.teleboy.ch&correlator=1482999097&cust_params=]]></VASTAdTagURI>
+                <VASTAdTagURI><![CDATA[//pubads.g.doubleclick.net/gampad/ads?sz=1024x576&iu=/8373/CH/Cinergy/CH_Teleboy.ch-new-InternetTV_EX/ChannelSwitch2/DE_ChannelSwitch2&ciu_szs=&nofb=1&impl=s&gdfp_req=1&env=vp&output=xml_vast3&unviewed_position_start=1&url=http://www.teleboy.ch&correlator=1482999097&cust_params=]]></VASTAdTagURI>
 
                             </Wrapper>
         </Ad>
