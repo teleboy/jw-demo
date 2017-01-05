@@ -1,1 +1,25 @@
-
+<!doctype html>
+<html>
+<head>
+<script src="src/jwplayer.js"></script>
+</head>
+<body>
+    <b>Issue:</b> On Edge browser the Quality does not toggle up in html5 mode until fullscreen has been entered
+    <br><br>
+    <b>Reproduction steps:</b> 
+    - Start a hls stream on Edge browser in html5 mode - The quality stays low<br />
+    - Switch into fullscreen mode - the quality immediately switches up<br />
+    <br><br>
+    <b>Expected behavior:</b> The quality should increase automatically.
+    <br><br>
+    <b>Actual outcome:</b> The quality only switches up when entering fullscreen mode.
+    <br><br><br>
+    <div id="player">Loading your player...</div>
+    <script>
+        jwplayer('player').setup({
+            file: 'https://playertest.longtailvideo.com/adaptive/bbbfull/bbbfull1280x720.m3u8',
+            primary: 'html5'
+        });
+    </script>
+</body>
+</html>
