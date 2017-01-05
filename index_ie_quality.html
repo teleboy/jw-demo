@@ -6,105 +6,25 @@
 <body>
     <b>Issue:</b> On Edge browser the Quality does not toggle up in html5 mode until fullscreen has been entered
     <br><br>
-    <b>Reproduction steps:</b> 
+    <b>Reproduction steps:</b><br /> 
     - Start a hls stream on Edge browser in html5 mode - The quality stays low<br />
     - Switch into fullscreen mode - the quality immediately switches up<br />
     <br><br>
     <b>Expected behavior:</b> The quality should increase automatically.
     <br><br>
-    <b>Actual outcome:</b> The quality only switches up when entering fullscreen mode.
+    <b>Actual outcome:</b> The quality only switches up when entering fullscreen mode or pause / resume stream.
     <br><br><br>
     <div id="player">Loading your player...</div>
-    <script>
-        /*jwplayer('player').setup({
-            "file": 'https://playertest.longtailvideo.com/adaptive/bbbfull/bbbfull1280x720.m3u8',
-            "primary": 'html5',
-            "width": 480,
-            "height": 270,
-            "hlshtml": true,
-            "key": "TASFGykoAClXXu0n5l0Fh7aNaBh1CGR52FSp6x16zI54q1+c9IL6XQ==",
-            "primary": "html5"
-        });*/
-        
+    <script>   
         jwplayer("player").setup({
-          "flashplayer": "//ssl.p.jwpcdn.com/player/v/7.8.6/jwplayer.flash.swf",
-          "height": 270,
-          "hlshtml": true,
           "key": "TASFGykoAClXXu0n5l0Fh7aNaBh1CGR52FSp6x16zI54q1+c9IL6XQ==",
+          "flashplayer": "//ssl.p.jwpcdn.com/player/v/7.8.6/jwplayer.flash.swf",
           "primary": "html5",
+          "hlshtml": true,
+          "height": 270,         
           "width": 480,
           "file": "//playertest.longtailvideo.com/adaptive/bbbfull/bbbfull.m3u8"
-            /*"playlist": [
-            {
-              "description": "The biggest Bunny in all of the land.",
-              "duration": 0,
-              "image": "//content.jwplatform.com/thumbs/HIvCjjYN-720.jpg",
-              "link": "//content.jwplatform.com/previews/HIvCjjYN",
-              "mediaid": "HIvCjjYN",
-              "pubdate": "Thu, 18 Aug 2016 18:07:29 -0000",
-              "recommendations": "//content.jwplatform.com/feed.json?related_media_id=HIvCjjYN&feed_id=7o0RCdXQ",
-              "sources": [
-                {
-                  "file": "//playertest.longtailvideo.com/adaptive/bbbfull/bbbfull.m3u8",
-                  "type": "application/vnd.apple.mpegurl"
-                }
-              ],
-              "tags": "",
-              "title": "Big Buck Bunny",
-              "tracks": []
-            }
-          ]*/
         });
-        
-        
-        /*
-        jwplayer("player").setup({
-          "autostart": false,
-          "controls": true,
-          "displaydescription": true,
-          "displaytitle": true,
-          "flashplayer": "//ssl.p.jwpcdn.com/player/v/7.8.6/jwplayer.flash.swf",
-          "height": 270,
-          "hlshtml": true,
-          "key": "TASFGykoAClXXu0n5l0Fh7aNaBh1CGR52FSp6x16zI54q1+c9IL6XQ==",
-          "mute": false,
-          "ph": 3,
-          "pid": "qgcLUxn1",
-          "playlist": [
-            {
-              "description": "The biggest Bunny in all of the land.",
-              "duration": 0,
-              "image": "//content.jwplatform.com/thumbs/HIvCjjYN-720.jpg",
-              "link": "//content.jwplatform.com/previews/HIvCjjYN",
-              "mediaid": "HIvCjjYN",
-              "pubdate": "Thu, 18 Aug 2016 18:07:29 -0000",
-              "recommendations": "//content.jwplatform.com/feed.json?related_media_id=HIvCjjYN&feed_id=7o0RCdXQ",
-              "sources": [
-                {
-                  "file": "//playertest.longtailvideo.com/adaptive/bbbfull/bbbfull.m3u8",
-                  "type": "application/vnd.apple.mpegurl"
-                }
-              ],
-              "tags": "",
-              "title": "Big Buck Bunny",
-              "tracks": []
-            }
-          ],
-          "plugins": {
-            "https://assets-jpcust.jwpsrv.com/player/6/6124956/ping.js": {
-              "pixel": "https://content.jwplatform.com/ping.gif"
-            }
-          },
-          "preload": "none",
-          "primary": "html5",
-          "repeat": false,
-          "stagevideo": false,
-          "stretching": "uniform",
-          "visualplaylist": true,
-          "width": 480
-        });
-        */
-        
     </script>
 </body>
 </html>
