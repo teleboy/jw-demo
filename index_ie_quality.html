@@ -2,7 +2,6 @@
 <html>
 <head>
 <script src="src/jwplayer.js"></script>
-<script>jwplayer.key="Ow8/e/z0YHQ8CMQjhd2FiKFy+gCV36NkJnc+1g==";</script>
 </head>
 <body>
     <b>Issue:</b> On Edge browser the Quality does not toggle up in html5 mode until fullscreen has been entered
@@ -17,13 +16,17 @@
     <br><br><br>
     <div id="player">Loading your player...</div>
     <script>
-        /*jwplayer('player').setup({
+        jwplayer('player').setup({
             file: 'https://playertest.longtailvideo.com/adaptive/bbbfull/bbbfull1280x720.m3u8',
             primary: 'html5',
-            width: 480
-        });*/
+            width: 480,
+            height: 270,
+            hlshtml: true,
+            key: "TASFGykoAClXXu0n5l0Fh7aNaBh1CGR52FSp6x16zI54q1+c9IL6XQ==",
+            primary: "html5"
+        });
         
-        
+        /*
         jwplayer("player").setup({
           "autostart": false,
           "controls": true,
@@ -69,6 +72,7 @@
           "visualplaylist": true,
           "width": 480
         });
+        */
         
     </script>
 </body>
