@@ -5,13 +5,13 @@
 <script>jwplayer.key="Ow8/e/z0YHQ8CMQjhd2FiKFy+gCV36NkJnc+1g==";</script>
 </head>
 <body>
-    <b>Issue:</b> The "complete" tracking-event fires immediately after the first ad is skipped.
+    <b>Issue:</b> The prerolls immediately skip on ie11 in flash mode.
     <br><br>
-    <b>Reproduction steps:</b> Skip the first ad form the adpod at any time
+    <b>Reproduction steps:</b> Start stream
     <br><br>
-    <b>Expected behavior:</b> The "complete" tracking-event shouldn't be fired.
+    <b>Expected behavior:</b> The Ad should play
     <br><br>
-    <b>Actual outcome:</b> The "complete" tracking-event fires immediately.
+    <b>Actual outcome:</b> The ad skips
     <br><br><br>
     <div id="player">Loading your player...</div>
     <script>
