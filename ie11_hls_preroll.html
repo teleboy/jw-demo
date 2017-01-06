@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<script src="src/jwplayer.js"></script>
+<script>jwplayer.key="Ow8/e/z0YHQ8CMQjhd2FiKFy+gCV36NkJnc+1g==";</script>
+</head>
+<body>
+    <b>Issue:</b> The "complete" tracking-event fires immediately after the first ad is skipped.
+    <br><br>
+    <b>Reproduction steps:</b> Skip the first ad form the adpod at any time
+    <br><br>
+    <b>Expected behavior:</b> The "complete" tracking-event shouldn't be fired.
+    <br><br>
+    <b>Actual outcome:</b> The "complete" tracking-event fires immediately.
+    <br><br><br>
+    <div id="player">Loading your player...</div>
+    <script>
+        jwplayer('player').setup({
+            file: '//content.jwplatform.com/videos/s8BPzDe0-kNspJqnJ.mp4',
+            primary: 'html5',
+            advertising: {
+		        client: "vast",
+	            schedule:{
+	                adbreak1: {
+		                offset: "pre",
+		                tag: "adpod.xml",
+		                skipoffset: 3
+	                }
+	            }
+	        }
+        });
+    </script>
+</body>
+</html>
