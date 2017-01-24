@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<script src="src/jwplayer.js"></script>
+</head>
+<body>
+    <b>Issue:</b> When returning from fullscreen, the controls are not switches into small-player-controls in jwplayer <b>7.9.0 beta</b>
+    <br><br>
+    <b>Reproduction steps:</b><br /> 
+    - Start playing a video file<br />
+    - Go into fullscreen <br />
+    - Exit fullsreen<br />
+    <br><br>
+    <b>Expected behavior:</b> The controls should switch automatically to the small players controls.
+    <br><br>
+    <b>Actual outcome:</b> The controls do not switch back to small-player-controls
+    <br><br><br>
+    <div id="player">Loading your player...</div>
+    <script>   
+        jwplayer("player").setup({
+          "key": "TASFGykoAClXXu0n5l0Fh7aNaBh1CGR52FSp6x16zI54q1+c9IL6XQ==",
+          "file": "//playertest.longtailvideo.com/adaptive/bbbfull/bbbfull.m3u8",
+          "primary": "html5",
+          "width": "300px",
+          "height": "168px"
+        });
+    </script>
+</body>
+</html>
