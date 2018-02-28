@@ -13,7 +13,7 @@
     <li>
         Skip / Complete the ad and wait 5 seconds
         <ul>
-            <li><i>on('pause')</i> is called</li>
+            <li><i>on('pause')</i> is called automatically</li>
             <li>pauseReason = 'external' (correct)</li>
         </ul>
     </li>
@@ -41,24 +41,27 @@
 </ol>
 
 <h3>Expected behavior:</h3>
-<p>The value of <b>pauseReason</b> inside the return object should be set according the actual reason after an ad is skipped (pauseReason: 'event' maybe?)</p>
+<p>The value of <b>pauseReason</b> inside the return object should be set according the actual reason after an ad is
+    skipped (pauseReason: 'event' maybe?)</p>
 
 <h3>Actual outcome:</h3>
-<p>Value of <b>pauseReason</b> inside the return object from <i>on('pause')</i> still remains the same from the previous action.</p>
+<p>Value of <b>pauseReason</b> inside the return object from <i>on('pause')</i> still remains the same from the previous
+    action.</p>
+<p>Why does the on('pause') event even fire?</p>
 
 
 <div id="player">Loading your player...</div>
 <script>
     (function() {
-        var done = false,
+        var autoPauseDone  = false,
             playerSettings = {
-            file: '//content.jwplatform.com/videos/s8BPzDe0-kNspJqnJ.mp4',
-            autostart: true,
-            advertising: {
-                client: 'vast',
-                skipoffset: 3
-            }
-        };
+                file: '//content.jwplatform.com/videos/s8BPzDe0-kNspJqnJ.mp4',
+                autostart: true,
+                advertising: {
+                    client: 'vast',
+                    skipoffset: 3
+                }
+            };
 
         jwplayer('player')
             .setup(playerSettings)
@@ -66,18 +69,38 @@
             .on('pause', _onPause)
             .on('time', _onTime);
 
+        /**
+         * Play an adtag
+         *
+         * @return void
+         * @private
+         */
         function _onBeforePlay() {
             this.playAd('//s3.amazonaws.com/demo.jwplayer.com/static-tag/preroll.xml');
         }
 
+        /**
+         * Output the pauseReason in an alert box
+         *
+         * @param {Object} e
+         * @return void
+         * @private
+         */
         function _onPause(e) {
             alert('onPause fired with pauseReason "' + e.pauseReason + '"');
         }
 
+        /**
+         * Auto pause the video after 5 seconds
+         *
+         * @param {Object} e
+         * @return void
+         * @private
+         */
         function _onTime(e) {
-            if (done === false && e.position > 5) {
+            if (autoPauseDone === false && e.position > 5) {
                 this.pause();
-                done = true;
+                autoPauseDone = true;
             }
         }
     })();
