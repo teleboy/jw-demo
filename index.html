@@ -1,34 +1,86 @@
 <!doctype html>
 <html>
 <head>
-<script src="src/jwplayer.js"></script>
-<script>jwplayer.key="Ow8/e/z0YHQ8CMQjhd2FiKFy+gCV36NkJnc+1g==";</script>
+    <script src="src/jwplayer.js"></script>
+    <script>jwplayer.key = "Jo+98pn8BAj/HhzxXepYJNX58bsgpdhFXIe4ow==";</script>
 </head>
 <body>
-    <b>Issue:</b> The "complete" tracking-event fires immediately after the first ad is skipped.
-    <br><br>
-    <b>Reproduction steps:</b> Skip the first ad form the adpod at any time
-    <br><br>
-    <b>Expected behavior:</b> The "complete" tracking-event shouldn't be fired.
-    <br><br>
-    <b>Actual outcome:</b> The "complete" tracking-event fires immediately.
-    <br><br><br>
-    <div id="player">Loading your player...</div>
-    <script>
-        jwplayer('player').setup({
+<h3>Issue:</h3>
+<p>Value of <b>pauseReason</b> isn't correct if on('pause') event is fired automatically by skipping an ad.</p>
+
+<h3>Reproduction steps:</h3>
+<ol>
+    <li>
+        Skip / Complete the ad and wait 5 seconds
+        <ul>
+            <li><i>on('pause')</i> is called</li>
+            <li>pauseReason = 'external' (correct)</li>
+        </ul>
+    </li>
+    <li>
+        Resume the video and skip the ad
+        <ul>
+            <li><i>on('pause')</i> is called</li>
+            <li>pauseReason = 'external' (should be auto|event|...)</li>
+        </ul>
+    </li>
+    <li>
+        Pause the video manually at any time
+        <ul>
+            <li><i>on('pause')</i> is called</li>
+            <li>pauseReason = 'interaction' (correct)</li>
+        </ul>
+    </li>
+    <li>
+        Resume the video and skip the ad
+        <ul>
+            <li><i>on('pause')</i> is called</li>
+            <li>pauseReason = 'interaction' (should be auto|event|...)</li>
+        </ul>
+    </li>
+</ol>
+
+<h3>Expected behavior:</h3>
+<p>The value of <b>pauseReason</b> inside the return object should be set according the actual reason after an ad is skipped (pauseReason: 'event' maybe?)</p>
+
+<h3>Actual outcome:</h3>
+<p>Value of <b>pauseReason</b> inside the return object from <i>on('pause')</i> still remains the same from the previous action.</p>
+
+
+<div id="player">Loading your player...</div>
+<script>
+    (function() {
+        var done = false,
+            playerSettings = {
             file: '//content.jwplatform.com/videos/s8BPzDe0-kNspJqnJ.mp4',
-            primary: 'html5',
+            autostart: true,
             advertising: {
-		        client: "vast",
-	            schedule:{
-	                adbreak1: {
-		                offset: "pre",
-		                tag: "adpod.xml",
-		                skipoffset: 3
-	                }
-	            }
-	        }
-        });
-    </script>
+                client: 'vast',
+                skipoffset: 3
+            }
+        };
+
+        jwplayer('player')
+            .setup(playerSettings)
+            .on('beforePlay', _onBeforePlay)
+            .on('pause', _onPause)
+            .on('time', _onTime);
+
+        function _onBeforePlay() {
+            this.playAd('//s3.amazonaws.com/demo.jwplayer.com/static-tag/preroll.xml');
+        }
+
+        function _onPause(e) {
+            alert('onPause fired with pauseReason "' + e.pauseReason + '"');
+        }
+
+        function _onTime(e) {
+            if (done === false && e.position > 5) {
+                this.pause();
+                done = true;
+            }
+        }
+    })();
+</script>
 </body>
 </html>
