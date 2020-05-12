@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <script src="jwplayer-8.9.3/jwplayer.js"></script>
+    <script src="jwplayer-8.13.8/jwplayer.js"></script>
     <script>jwplayer.key = "Jo+98pn8BAj/HhzxXepYJNX58bsgpdhFXIe4ow==";</script>
 </head>
 <body>
@@ -21,20 +21,23 @@
 
 
 <div id="player">Loading your player...</div>
+
+<pre id="adError" style="background-color: lightgray; padding: 5px;"></pre>
 <script>
     (function() {
         var playerSettings = {
-                file: 'https://content.jwplatform.com/videos/s8BPzDe0-kNspJqnJ.mp4',
-                autostart: true,
-                advertising: {
-                    client: 'vast',
-                    skipoffset: 3,
-                    tag: 'https://secure.adnxs.com/ptv?id=12808489&cb=697701344760429400&vskippable=1&vplaybackmethod=1&vwidth=1920&vheight=1080&vcontext=1&vv=3&kw_kvpagetype=player&kw_kvstation=srf2hd&kw_kvgenre=entertainment&kw_tag=entertainment&gender=m&age=35'
-                }
-            };
+            file: 'https://content.jwplatform.com/videos/s8BPzDe0-kNspJqnJ.mp4',
+            autostart: true,
+            advertising: {
+                client: 'vast',
+                skipoffset: 3
+            }
+        };
 
         jwplayer('player')
-            .setup(playerSettings);
+            .setup(playerSettings)
+            .on('beforePlay', _onBeforePlay)
+            .on('adError', _onAdError);
 
         /**
          * Play an adtag
@@ -43,7 +46,12 @@
          * @private
          */
         function _onBeforePlay() {
-            this.playAd('//s3.amazonaws.com/demo.jwplayer.com/static-tag/preroll.xml');
+            this.playAd('https://secure.adnxs.com/ptv?id=12808489&cb=__random-number__&vskippable=1&vplaybackmethod=1&vwidth=__player-width__&vheight=__player-height__&vcontext=1&vv=3&kw_kvpagetype=player&kw_kvstation=srf2hd&kw_kvgenre=entertainment&kw_tag=entertainment&gender=m&age=35');
+        }
+
+        function _onAdError(e) {
+            document.getElementById('adError').innerHTML = JSON.stringify(e, null, 4);
+            console.log('AdError', e);
         }
     })();
 </script>
