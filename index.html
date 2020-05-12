@@ -1,72 +1,40 @@
 <!doctype html>
 <html>
 <head>
-    <script src="src/jwplayer.js"></script>
+    <script src="jwplayer-8.9.3/jwplayer.js"></script>
     <script>jwplayer.key = "Jo+98pn8BAj/HhzxXepYJNX58bsgpdhFXIe4ow==";</script>
 </head>
 <body>
 <h3>Issue:</h3>
-<p>Value of <b>pauseReason</b> isn't correct if on('pause') event is fired automatically by skipping an ad.</p>
+<p>VPAID ads doesn't play</p>
 
 <h3>Reproduction steps:</h3>
 <ol>
-    <li>
-        Skip / Complete the ad and wait 5 seconds
-        <ul>
-            <li><i>on('pause')</i> is called automatically</li>
-            <li>pauseReason = 'external' (correct)</li>
-        </ul>
-    </li>
-    <li>
-        Resume the video and skip / complete the ad
-        <ul>
-            <li><i>on('pause')</i> is called</li>
-            <li>pauseReason = 'external' (should be auto|event|...)</li>
-        </ul>
-    </li>
-    <li>
-        Pause the video manually at any time
-        <ul>
-            <li><i>on('pause')</i> is called</li>
-            <li>pauseReason = 'interaction' (correct)</li>
-        </ul>
-    </li>
-    <li>
-        Resume the video and skip / complete the ad
-        <ul>
-            <li><i>on('pause')</i> is called</li>
-            <li>pauseReason = 'interaction' (should be auto|event|...)</li>
-        </ul>
-    </li>
+    <li>Play</li>
 </ol>
 
 <h3>Expected behavior:</h3>
-<p>The value of <b>pauseReason</b> inside the return object should be set according the actual reason after an ad is
-    skipped (pauseReason: 'event' maybe?)</p>
+<p>The ad is playing</p>
 
 <h3>Actual outcome:</h3>
-<p>Value of <b>pauseReason</b> inside the return object from <i>on('pause')</i> still remains the same from the previous
-    action.</p>
+<p>The ad doesn't play</p>
 
 
 <div id="player">Loading your player...</div>
 <script>
     (function() {
-        var autoPauseDone  = false,
-            playerSettings = {
-                file: '//content.jwplatform.com/videos/s8BPzDe0-kNspJqnJ.mp4',
+        var playerSettings = {
+                file: 'https://content.jwplatform.com/videos/s8BPzDe0-kNspJqnJ.mp4',
                 autostart: true,
                 advertising: {
                     client: 'vast',
-                    skipoffset: 3
+                    skipoffset: 3,
+                    tag: 'https://secure.adnxs.com/ptv?id=12808489&cb=697701344760429400&vskippable=1&vplaybackmethod=1&vwidth=1920&vheight=1080&vcontext=1&vv=3&kw_kvpagetype=player&kw_kvstation=srf2hd&kw_kvgenre=entertainment&kw_tag=entertainment&gender=m&age=35'
                 }
             };
 
         jwplayer('player')
-            .setup(playerSettings)
-            .on('beforePlay', _onBeforePlay)
-            .on('pause', _onPause)
-            .on('time', _onTime);
+            .setup(playerSettings);
 
         /**
          * Play an adtag
@@ -76,31 +44,6 @@
          */
         function _onBeforePlay() {
             this.playAd('//s3.amazonaws.com/demo.jwplayer.com/static-tag/preroll.xml');
-        }
-
-        /**
-         * Output the pauseReason in an alert box
-         *
-         * @param {Object} e
-         * @return void
-         * @private
-         */
-        function _onPause(e) {
-            alert('onPause fired with pauseReason "' + e.pauseReason + '"');
-        }
-
-        /**
-         * Auto pause the video after 5 seconds
-         *
-         * @param {Object} e
-         * @return void
-         * @private
-         */
-        function _onTime(e) {
-            if (autoPauseDone === false && e.position > 5) {
-                this.pause();
-                autoPauseDone = true;
-            }
         }
     })();
 </script>
