@@ -6,20 +6,6 @@
     <script src="https://sb.scorecardresearch.com/c2/plugins/streamingtag_plugin_jwplayer.js"></script>
 </head>
 <body>
-<h3>Issue:</h3>
-<p>VPAID ads doesn't play</p>
-
-<h3>Reproduction steps:</h3>
-<ol>
-    <li>Play</li>
-</ol>
-
-<h3>Expected behavior:</h3>
-<p>The ad is playing</p>
-
-<h3>Actual outcome:</h3>
-<p>The ad doesn't play</p>
-
 
 <div id="player">Loading your player...</div>
 
@@ -31,7 +17,9 @@
             autostart: true,
             advertising: {
                 client: 'vast',
-                skipoffset: 3
+                skipoffset: 3,
+                autoplayadsmuted: true,
+                vpaidcontrols: true
             }
         };
 
